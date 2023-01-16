@@ -1,6 +1,7 @@
 import datetime
 from flask import Flask, request, jsonify
 from tinydb import TinyDB, Query
+import pytz
 
 app = Flask(__name__)
 state = TinyDB('state.json')
@@ -15,7 +16,7 @@ def sleep():
 @app.route('/sleep', methods=['POST', 'DELETE'])
 def start():
     if request.method == 'POST':
-        current_time = datetime.datetime.now().timestamp()
+        current_time = datetime.datetime.now(pytz.utc).timestamp()
         sleep_data.update({'start': current_time})
         return 'started'
     elif request.method == 'DELETE':
