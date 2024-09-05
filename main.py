@@ -16,9 +16,9 @@ def sleep():
 @app.route('/sleep', methods=['POST', 'DELETE'])
 def start():
     if request.method == 'POST':
-        current_time = datetime.datetime.now(pytz.timezone('Europe/Amsterdam')).timestamp()
+        current_time = datetime.datetime.now(pytz.timezone('Europe/Sofia')).timestamp()
         sleep_data.update({'start': current_time})
         return 'started'
     elif request.method == 'DELETE':
         timestamp = sleep_data.all()[0]['start']
-        return jsonify({'start': datetime.datetime.fromtimestamp(timestamp, pytz.timezone('Europe/Amsterdam')).strftime('%Y-%m-%d %H:%M:%S')})
+        return jsonify({'start': datetime.datetime.fromtimestamp(timestamp, pytz.timezone('Europe/Sofia')).strftime('%Y-%m-%d %H:%M:%S')})
