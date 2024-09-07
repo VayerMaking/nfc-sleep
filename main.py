@@ -24,10 +24,10 @@ def init():
 def sleep():
 
     try:
-        return state.all()[0]
+        current_state = state.all()[0]
     except IndexError:
         state.insert({'isSleeping': False})
-        return state.all()[0]
+        current_state = state.all()[0]
 
     state.update({'isSleeping': not current_state['isSleeping']}, Query().isSleeping == current_state['isSleeping'])
     return current_state
