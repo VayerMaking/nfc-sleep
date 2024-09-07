@@ -7,6 +7,19 @@ app = Flask(__name__)
 state = TinyDB('state.json')
 sleep_data = TinyDB('sleep.json')
 
+@app.route('/init')
+def init():
+    # check if state.json and sleep.json files exist, if not create them
+    try:
+        state.all()[0]
+    except IndexError:
+        open("state.json", 'a').close()
+
+    try:
+        sleep_data.all()[0]
+    except IndexError:
+        open("sleep.json", 'a').close()
+
 @app.route('/state')
 def sleep():
 
